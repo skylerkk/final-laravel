@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\BookController;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -13,10 +13,30 @@ use App\Http\Controllers\BookController;
 |
 */
 
+use App\Http\Controllers\UsersController;
+use Illuminate\Http\Request;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/welcome', function () use ($router){
+$router->get('/welcome', function () use ($router) {
     return "Hello World";
+});
+
+$router->post('/register', 'UsersController@register');
+
+// $router->get('/users/{id}', 'UsersController@user');
+
+$router->get('/user/sheets/{id}', 'CharacterSheetController@get_sheets');
+$router->get('/character/{id}', 'CharacterSheetController@get_one_sheet');
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+
+    $router->get('/users/{id}', 'UsersController@user');
+    $router->post('user/get_user', 'UsersController@get_user');
+    $router->get('/api/user', 'UsersController@get_curr_user');
+    $router->post('/users/update', 'UsersController@update');
+    $router->post('/create_sheet', 'CharacterSheetController@create_sheet');
+
 });

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -15,7 +15,7 @@ class UsersController extends Controller
         
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|unique:users|email',
             'password' => 'required'
         ]);
 
@@ -37,5 +37,33 @@ class UsersController extends Controller
     public function sayHello(){
         return "Hello";
     }
-     
+
+    public function user($id)
+    {
+        return User::findOrFail($id);
+    }
+    
+    public function get_user(Request $request){
+        $data = $request->all();
+        $user = User::where('email',$data['email'])->get()->first();
+        return $user;
+    }
+
+    function get_curr_user(Request $request){
+        $user = $request->user();
+        return $user->toArray();
+    }
+
+    public function update(Request $request){
+        $input = $request->all();
+        $user = User::find($input['id']);
+        foreach ($input as $field => $value){
+            $user[$field] = $value;
+        }
+
+        $user->save();
+        return $user->toArray();
+
+    }
+
 }
