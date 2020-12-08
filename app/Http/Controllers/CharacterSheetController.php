@@ -22,9 +22,10 @@ class CharacterSheetController extends Controller
 
     public function get_one_sheet($id){
         $sheet = CharacterSheet::where('id', $id)->get();
-        $stats = CharacterStats::where('character_sheet_id', $sheet);
-        $info = CharacterInfo::where('character_sheet_id', $sheet);
-        return $sheet;
+        // return $sheet::where('id')->get();
+        $stats = CharacterStats::where('character_sheet_id', $id)->get();
+        $info = CharacterInfo::where('character_sheet_id', $id)->get();
+        return response(['stats' => $stats, 'sheet' => $sheet, 'info' => $info]);   
     }
 
     public function create_sheet(Request $request){
@@ -52,5 +53,11 @@ class CharacterSheetController extends Controller
         $info->alignment = $input['alignment'];
         $info->save();
         return response([ 'message' => 'Sheet created successfully!', 'status' => true]);
+    }
+
+    public function delete_sheet(Request $request){
+        $input = $request->all();
+        CharacterSheet::find($input['id'])->delete();
+        return response([ 'message' => 'Sheet deleted successfully!', 'status' => true]);
     }
 }

@@ -27,16 +27,15 @@ $router->get('/welcome', function () use ($router) {
 $router->post('/register', 'UsersController@register');
 
 // $router->get('/users/{id}', 'UsersController@user');
-
+$router->get('/all_users', 'UsersController@get_all_users');
+$router->get('/users/{id}', 'UsersController@user');
 $router->get('/user/sheets/{id}', 'CharacterSheetController@get_sheets');
 $router->get('/character/{id}', 'CharacterSheetController@get_one_sheet');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
-
-    $router->get('/users/{id}', 'UsersController@user');
     $router->post('user/get_user', 'UsersController@get_user');
     $router->get('/api/user', 'UsersController@get_curr_user');
     $router->post('/users/update', 'UsersController@update');
     $router->post('/create_sheet', 'CharacterSheetController@create_sheet');
-
+    $router->post('/delete_sheet', 'CharacterSheetController@delete_sheet');
 });

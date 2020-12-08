@@ -2,5 +2,6 @@
 /.idea
 Homestead.json
 Homestead.yaml
-
+.env
+app.yaml
 .phpunit.result.cache

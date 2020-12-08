@@ -49,6 +49,11 @@ class UsersController extends Controller
         return $user;
     }
 
+    public function get_all_users(){
+        $user = User::get();
+        return $user;
+    }
+
     function get_curr_user(Request $request){
         $user = $request->user();
         return $user->toArray();
