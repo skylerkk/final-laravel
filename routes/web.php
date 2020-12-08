@@ -38,4 +38,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/users/update', 'UsersController@update');
     $router->post('/create_sheet', 'CharacterSheetController@create_sheet');
     $router->post('/delete_sheet', 'CharacterSheetController@delete_sheet');
+    $router->post('/update_sheet_stats', 'CharacterSheetController@update_sheet_stats');
+    $router->post('/update_sheet_info', 'CharacterSheetController@update_sheet_info');
 });

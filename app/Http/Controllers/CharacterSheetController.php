@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\CharacterSheet;
 use App\Models\CharacterStats;
 use App\Models\CharacterInfo;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CharacterSheetController extends Controller
 {
@@ -59,5 +61,30 @@ class CharacterSheetController extends Controller
         $input = $request->all();
         CharacterSheet::find($input['id'])->delete();
         return response([ 'message' => 'Sheet deleted successfully!', 'status' => true]);
+    }
+
+
+    public function update_sheet_stats(Request $request){
+        $input = $request->all();
+        $stats = CharacterStats::where('character_sheet_id', $input['id'])->get()->first();
+        foreach ($input as $field => $value){
+            if($field != 'id'){
+                $stats[$field] = $value;
+            }
+        }
+        $stats->save();
+        return $stats->toArray();
+    }
+
+    public function update_sheet_info(Request $request){
+        $input = $request->all();
+        $info = CharacterInfo::where('character_sheet_id', $input['id'])->get()->first();
+        foreach ($input as $field => $value){
+            if($field != 'id'){
+                $info[$field] = $value;
+            }
+        }
+        $info->save();
+        return $info->toArray();
     }
 }

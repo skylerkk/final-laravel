@@ -65,10 +65,8 @@ class UsersController extends Controller
         foreach ($input as $field => $value){
             $user[$field] = $value;
         }
-
         $user->save();
         return $user->toArray();
-
     }
 
 }
