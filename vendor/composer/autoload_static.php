@@ -633,6 +633,7 @@ class ComposerStaticInitbee78185d98ee45c30ebf91f75b0b2a9
         'App\\Models\\CharacterInfo' => __DIR__ . '/../..' . '/app/Models/CharacterInfo.php',
         'App\\Models\\CharacterSheet' => __DIR__ . '/../..' . '/app/Models/CharacterSheet.php',
         'App\\Models\\CharacterStats' => __DIR__ . '/../..' . '/app/Models/CharacterStats.php',
+        'App\\Models\\Skills' => __DIR__ . '/../..' . '/app/Models/Skills.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

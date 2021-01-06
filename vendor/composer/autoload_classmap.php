@@ -23,6 +23,7 @@ return array(
     'App\\Models\\CharacterInfo' => $baseDir . '/app/Models/CharacterInfo.php',
     'App\\Models\\CharacterSheet' => $baseDir . '/app/Models/CharacterSheet.php',
     'App\\Models\\CharacterStats' => $baseDir . '/app/Models/CharacterStats.php',
+    'App\\Models\\Skills' => $baseDir . '/app/Models/Skills.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

@@ -31,6 +31,7 @@ $router->get('/all_users', 'UsersController@get_all_users');
 $router->get('/users/{id}', 'UsersController@user');
 $router->get('/user/sheets/{id}', 'CharacterSheetController@get_sheets');
 $router->get('/character/{id}', 'CharacterSheetController@get_one_sheet');
+$router->get('/charcter_skills', 'CharacterSheetController@get_skills');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('user/get_user', 'UsersController@get_user');
@@ -40,4 +41,5 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/delete_sheet', 'CharacterSheetController@delete_sheet');
     $router->post('/update_sheet_stats', 'CharacterSheetController@update_sheet_stats');
     $router->post('/update_sheet_info', 'CharacterSheetController@update_sheet_info');
+    $router->post('/update_sheet_skills', 'CharacterSheetController@update_sheet_skills');
 });
