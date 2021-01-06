@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\CharacterSheet;
 use App\Models\CharacterStats;
 use App\Models\CharacterInfo;
+use App\Models\CharacterSkills;
+use App\Models\Skills;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -54,6 +56,27 @@ class CharacterSheetController extends Controller
         $info->size = $input['size'];
         $info->alignment = $input['alignment'];
         $info->save();
+        $skills = new CharacterSkills();
+        $skills->character_sheet_id = $sheet->id;
+        $skills->athletics = $input['athletics'];
+        $skills->acrobatics = $input['acrobatics'];
+        $skills->sleightofhand = $input['sleight'];
+        $skills->stealth = $input['stealth'];
+        $skills->arcana = $input['arcana'];
+        $skills->history = $input['history'];
+        $skills->investigation = $input['investigation'];
+        $skills->nature = $input['nature'];
+        $skills->religion = $input['religion'];
+        $skills->animalhandling = $input['animalHandling'];
+        $skills->insight = $input['insight'];
+        $skills->medicine = $input['medicine'];
+        $skills->perception = $input['perception'];
+        $skills->survival = $input['survival'];
+        $skills->deception = $input['deception'];
+        $skills->intimidation = $input['intimidation'];
+        $skills->performance = $input['performance'];
+        $skills->persuasion = $input['persuasion'];
+        $skills->save();
         return response([ 'message' => 'Sheet created successfully!', 'status' => true]);
     }
 
@@ -76,6 +99,18 @@ class CharacterSheetController extends Controller
         return $stats->toArray();
     }
 
+    public function update_sheet_skills(Request $request){
+        $input = $request->all();
+        $skills = CharacterSkills::where('character_sheet_id', $input['id'])->get()->first();
+        foreach ($input as $field => $value){
+            if($field != 'id'){
+                $skills[$field] = $value;
+            }
+        }
+        $skills->save();
+        return $skills->toArray();
+    }
+
     public function update_sheet_info(Request $request){
         $input = $request->all();
         $info = CharacterInfo::where('character_sheet_id', $input['id'])->get()->first();
@@ -86,5 +121,10 @@ class CharacterSheetController extends Controller
         }
         $info->save();
         return $info->toArray();
+    }
+
+    public function get_skills(){
+        $info = Skills::get();
+        return $info;
     }
 }
